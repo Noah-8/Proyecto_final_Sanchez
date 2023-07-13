@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Teclado</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Datos del teclado {{teclado.modelo}}
+{% endblock h1_header %}
+
+{% block contenido %}
+<li>Marca {{teclado.marca}}</li>
+<li>Publicado el {{teclado.fecha_publicacion}}</li>
+{% endblock contenido %}
+

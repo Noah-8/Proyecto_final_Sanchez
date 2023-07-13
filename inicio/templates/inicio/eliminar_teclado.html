@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Eliminar teclado</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Eliminar teclado {{teclado.marca}} {{teclado.modelo}}
+{% endblock h1_header %}
+
+{% block contenido %}
+<form action={% url 'inicio:eliminar_teclado' teclado.id %} method="post">
+    {% csrf_token %}
+    <p>Va a eliminar el teclado {{teclado}}</p>
+    <button>Eliminar</button>
+</form>
+
+{% endblock contenido %}

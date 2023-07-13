@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block title_head %}
+<title>Teclados</title>
+{% endblock title_head %}
+
+{% block h1_header %}
+Teclados
+{% endblock h1_header %}
+
+{% block contenido %}
+<button>
+    <a class="navbar-brand" href={% url 'inicio:publicar_teclado' %}>Publicar teclado</a>
+</button>
+
+<form action={% url 'inicio:teclados' %}>
+    {{formulario}}
+    <button>Buscar</button>
+</form>
+
+{% if lista_teclados %}
+{% for teclado in lista_teclados %}
+<li>
+    {{teclado}}
+    <button>
+        <a class="navbar-brand" href={% url 'inicio:detalle_teclado' teclado.id %}>Ver mas</a>
+    </button>
+    <button>
+        <a class="navbar-brand" href={% url 'inicio:modificar_teclado' teclado.id %}>Modificar</a>
+    </button>
+    <button>
+        <a class="navbar-brand" href={% url 'inicio:eliminar_teclado' teclado.id %}>Eliminar</a>
+    </button>
+</li>
+{% endfor %}
+{% else %}
+<p>No se encontraron teclados</p>
+{% endif %}
+
+{% endblock contenido %}
