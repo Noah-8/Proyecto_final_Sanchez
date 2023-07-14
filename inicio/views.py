@@ -1,17 +1,18 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from inicio.forms import PublicarTecladoFormulario, BusquedaTecladoFormulario
 from inicio.models import Teclado
-
 from django.views.generic.edit import UpdateView, DeleteView
 from django.views.generic.detail import DetailView
-
 from django.urls import reverse_lazy
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
 def inicio(request):
     return render(request, 'inicio/inicio.html')
 
+@login_required
 def publicar_teclado(request):
     mensaje = ''
     if request.method == 'POST':
@@ -20,12 +21,12 @@ def publicar_teclado(request):
             info = formulario.cleaned_data
             teclado = Teclado(modelo=info['modelo'], marca=info['marca'], fecha_publicacion=info['fecha_publicacion'])
             teclado.save()
-            mensaje = f'Se publico el teclado {teclado.marca} {teclado.modelo}'
+            return redirect('inicio:teclados')
         else:
             return render(request, 'inicio/publicar_teclado.html', {'formulario': formulario})
     
     formulario = PublicarTecladoFormulario()
-    return render(request, 'inicio/publicar_teclado.html', {'formulario': formulario, 'mensaje': mensaje})
+    return render(request, 'inicio/publicar_teclado.html', {'formulario': formulario})
 
 def listar_teclados(request):
     
@@ -41,14 +42,14 @@ class DetalleTeclado(DetailView):
     model = Teclado
     template_name = "inicio/detalle_teclado.html"
     
-class ModificarTeclado(UpdateView):
+class ModificarTeclado(LoginRequiredMixin, UpdateView):
     model = Teclado
     fields = ['modelo', 'marca']
     template_name = "inicio/modificar_teclado.html"
     success_url = reverse_lazy('inicio:teclados')
 
 
-class EliminarTeclado(DeleteView):
+class EliminarTeclado(LoginRequiredMixin, DeleteView):
     model = Teclado
     template_name = "inicio/eliminar_teclado.html"
     success_url = reverse_lazy('inicio:teclados')
