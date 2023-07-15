@@ -11,5 +11,8 @@ Datos del teclado {{teclado.modelo}}
 {% block contenido %}
 <li>Marca {{teclado.marca}}</li>
 <li>Publicado el {{teclado.fecha_publicacion}}</li>
+<li>El autor es {{teclado.autor}}</li>
+<li>Descripcion: {{teclado.descripcion}}</li>
+<li><img src={{teclado.imagen.url}} alt="" height='100px'></li>
 {% endblock contenido %}
 

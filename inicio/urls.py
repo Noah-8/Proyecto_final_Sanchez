@@ -5,6 +5,8 @@ app_name = 'inicio'
 
 urlpatterns = [
     path('', views.inicio, name='inicio'),
+    path('about/', views.about, name='about'),
+    path('paginas/', views.paginas, name='paginas'),
     path('teclados/', views.listar_teclados, name='teclados'),
     path('teclados/<int:pk>/', views.DetalleTeclado.as_view(), name='detalle_teclado'),
     path('teclados/<int:pk>/modificar/', views.ModificarTeclado.as_view(), name='modificar_teclado'),

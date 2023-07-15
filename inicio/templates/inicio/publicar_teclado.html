@@ -9,7 +9,7 @@ Publicar teclado
 {% endblock h1_header %}
 
 {% block contenido %}
-<form action={% url 'inicio:publicar_teclado' %} method="post">
+<form action={% url 'inicio:publicar_teclado' %} method="post" enctype='multipart/form-data'>
     {% csrf_token %}
     <table>
         {{formulario}}

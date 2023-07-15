@@ -16,10 +16,10 @@ def inicio(request):
 def publicar_teclado(request):
     mensaje = ''
     if request.method == 'POST':
-        formulario = PublicarTecladoFormulario(request.POST)
+        formulario = PublicarTecladoFormulario(request.POST, request.FILES)
         if formulario.is_valid():
             info = formulario.cleaned_data
-            teclado = Teclado(modelo=info['modelo'], marca=info['marca'], fecha_publicacion=info['fecha_publicacion'])
+            teclado = Teclado(modelo=info['modelo'], marca=info['marca'], fecha_publicacion=info['fecha_publicacion'], descripcion=info['descripcion'], autor=info['autor'], imagen=info['imagen'])
             teclado.save()
             return redirect('inicio:teclados')
         else:
@@ -44,7 +44,7 @@ class DetalleTeclado(DetailView):
     
 class ModificarTeclado(LoginRequiredMixin, UpdateView):
     model = Teclado
-    fields = ['modelo', 'marca']
+    fields = ['modelo', 'marca', 'descripcion']
     template_name = "inicio/modificar_teclado.html"
     success_url = reverse_lazy('inicio:teclados')
 
@@ -53,3 +53,9 @@ class EliminarTeclado(LoginRequiredMixin, DeleteView):
     model = Teclado
     template_name = "inicio/eliminar_teclado.html"
     success_url = reverse_lazy('inicio:teclados')
+    
+def about(request):
+    return render(request, 'inicio/about.html')
+
+def paginas(request):
+    return render(request, 'inicio/paginas.html')
