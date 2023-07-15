@@ -46,6 +46,10 @@ def registrarse(request):
     return render(request, 'usuarios/registro.html', {'formulario': formulario})
 
 @login_required
+def perfil(request):
+    return render(request, 'usuarios/perfil.html')
+
+@login_required
 def edicion_perfil(request):
     info_extra_user = request.user.infoextra
     if request.method == 'POST':
@@ -56,6 +60,12 @@ def edicion_perfil(request):
             if avatar:
                 info_extra_user.avatar = avatar
                 info_extra_user.save()
+                
+            link = formulario.cleaned_data.get('link')
+            if link:
+                info_extra_user.link = link
+                info_extra_user.save()
+            
             
             formulario.save()
             return redirect('inicio:inicio')
