@@ -72,7 +72,7 @@ def edicion_perfil(request):
         else:
             return render(request, 'usuarios/edicion_perfil.html', {'formulario': formulario})
     
-    formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar}, instance=request.user)
+    formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar, 'link': info_extra_user.link}, instance=request.user)
     return render(request, 'usuarios/edicion_perfil.html', {'formulario': formulario})
 
 
