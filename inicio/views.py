@@ -14,7 +14,6 @@ def inicio(request):
 
 @login_required
 def publicar_teclado(request):
-    mensaje = ''
     if request.method == 'POST':
         formulario = PublicarTecladoFormulario(request.POST, request.FILES)
         if formulario.is_valid():
