@@ -61,9 +61,9 @@ def edicion_perfil(request):
                 info_extra_user.avatar = avatar
                 info_extra_user.save()
                 
-            link = formulario.cleaned_data.get('link')
-            if link:
-                info_extra_user.link = link
+            descripcion = formulario.cleaned_data.get('descripcion')
+            if descripcion:
+                info_extra_user.descripcion = descripcion
                 info_extra_user.save()
             
             
@@ -72,7 +72,7 @@ def edicion_perfil(request):
         else:
             return render(request, 'usuarios/edicion_perfil.html', {'formulario': formulario})
     
-    formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar, 'link': info_extra_user.link}, instance=request.user)
+    formulario = MiFormularioDeEdicionDeDatosDeUsuario(initial={'avatar': info_extra_user.avatar, 'descripcion': info_extra_user.descripcion}, instance=request.user)
     return render(request, 'usuarios/edicion_perfil.html', {'formulario': formulario})
 
 

@@ -15,6 +15,6 @@
 <li>Nombre: {{user.first_name}}</li>
 <li>Apellido: {{user.last_name}}</li>
 <li>Email: {{user.email}}</li>
-<li>Link: {{request.user.infoextra.link}}</li>
+<li>descripcion: {{request.user.infoextra.descripcion | safe}}</li>
 <button type='button'><a class="navbar-brand" href={% url 'usuarios:editar_perfil' %}>Editar perfil</a></button>
 {% endblock contenido %}

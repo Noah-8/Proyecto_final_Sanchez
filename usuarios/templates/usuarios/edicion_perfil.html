@@ -13,6 +13,7 @@ Editar perfil
     {% csrf_token %}
     <table>
         {{formulario}}
+        {{formulario.media}}
     </table>
     <button>Guardar cambios</button>
     <button type='button'><a class="navbar-brand" href={% url 'usuarios:modificar_pass' %}>Cambiar contraseña</a></button>
